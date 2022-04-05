@@ -1,0 +1,113 @@
+<?php
+include("conexao.php");
+extract($_POST); // Extrai os dados do form
+//echo $empresa;die;
+$log = "";
+
+/*############################################################################*/
+//Tratamento inicial - segurança (nome e cpf)
+if($name == "" || $cpf == "" || $telefone == "" || $empresa == "0"){
+   $log = "Houve um erro no preenchimento do formulário. Verifique os campos obrigatórios<br><a href='javascript:window.history.go(-1)'>Voltar</a>";
+}//echo 'Log: '.$log;die;
+
+/*############################################################################*/
+//EXECUÇÕES:
+require("trata_inputs.php");//Tratamento de inputs
+require("mysql_cadastro.php");//Insert Cadastro
+
+/*############################################################################*/
+
+if(@$cadastro == 1){
+   $log .= "
+   <p><font color='#65bdbd' size=+1><strong>Seu cadastro foi realizado com sucesso.</strong><br>
+   Se ap&oacute;s o prazo de 72h, voc&ecirc; n&atilde;o receber suas informa&ccedil;&otilde;es de  acesso, <br>
+   </font><font color='#65bdbd' size=+1>entre em contato conosco pelos nosso canais de atendimento: <br>
+   WhatsApp:  <a href='http://nwdsk.co/vcard/dC375'>(61)99837-1005</a>, Chat Online no site,
+   Telefone: <a href='tel:+5508009401590?'>0800 940 1590</a> e <br>
+   e-mail <a href='mailto:privilege@credijustra.com.br'>privilege@credijustra.com.br</a>.<br>
+   <font color = '333333'><b><i>Protocolo de cadastro: $protocolo</i></b></font>
+   </font></p>
+   ";
+   $img = "img_sucess.png";
+}else{
+   $log = "Seu cadastro n&atilde;o foi realizado.<br>O sistema reportou o seguinte erro:<br>".$log;
+   $img = "img_error.png";
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="pr-BR">
+<head>
+	<title>Nelma Penteado - Mulher Diamante</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../images/icons/diamond.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../css/util.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+
+				<span class="contact100-form-title"><a href="../index.html"><img src="../images/marca-diamante.png" width="250" height="158" alt=""/></a></span>
+				<div align="center"><?php echo $log; ?></div>
+			  <div class="container-contact100-form-btn"></div>
+			  <div align="center"><br>
+				<font size="1"><em>*Evento apenas para convidadas mulheres.</em></font>
+			  </div>
+
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+
+<!--===============================================================================================-->
+	<script src="../vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../vendor/bootstrap/js/popper.js"></script>
+	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../vendor/select2/select2.min.js"></script>
+	<script>
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="../vendor/daterangepicker/moment.min.js"></script>
+	<script src="../vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="../vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="../js/main.js"></script>
+
+
+</body>
+</html>
